@@ -1,0 +1,16 @@
+# .gitignore para Visual Studio 2022
+.vs/
+*.user
+*.suo
+*.log
+*.obj
+*.cache
+*.csproj.user
+bin/
+debug/
+release/
+packages/
+*.pdb
+*.exe
+*.dll
+*.sqlite

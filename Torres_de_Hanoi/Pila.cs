@@ -1,43 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Torres_de_Hanoi
 {
+    // Clase Pila (Palo)
     class Pila
     {
-        public int Size { get; set; }
-        /* TODO: Elegir tipo de Top
-        public int Top { get; set; }
-        public String Top { get; set; }        
-        */
-        /* TODO: Elegir tipo de Elementos
-        public Disco[] Elementos { get; set; }
-        public List<Disco> Elementos { get; set; }
-        */
+        private Stack<Disco> discos = new Stack<Disco>();
+        public string Nombre { get; }
 
-        /* TODO: Implementar métodos */
-        public Pila()
+        public Pila(string nombre) => Nombre = nombre;
+
+        public void Push(Disco d) => discos.Push(d);
+
+        public Disco Pop() => discos.Pop();
+
+        public Disco Top() => discos.Count > 0 ? discos.Peek() : null;
+
+        public bool IsEmpty() => discos.Count == 0;
+
+        public int Count => discos.Count;
+
+        public void MostrarEstado()
         {
-
+            Console.Write($"{Nombre}: ");
+            foreach (var disco in discos)
+            {
+                Console.Write(disco.Tamano + " ");
+            }
+            Console.WriteLine();
         }
-
-        public void push(Disco d)
-        {
-
-        }
-
-        public Disco pop()
-        {
-            return null;
-        }                
-
-        public bool isEmpty()
-        {
-            return true;
-        }
-
     }
 }
