@@ -14,33 +14,49 @@ namespace Torres_de_Hanoi
             ini = new Pila("INI");
             fin = new Pila("FIN");
             aux = new Pila("AUX");
-            for (int i = n; i >= 1; i--) ini.Push(new Disco(i));
+
+            for (int i = n; i >= 1; i--)
+                ini.Push(new Disco(i)); // Ajustar orden inicial correctamente
         }
 
-        private void MoverDisco(Pila a, Pila b)
+        private void MoverDisco(Pila origen, Pila destino)
         {
-            if (!a.IsEmpty() && (b.IsEmpty() || a.Top().Tamano < b.Top().Tamano))
+            if (!origen.IsEmpty() && (destino.IsEmpty() || origen.Top().Tamano < destino.Top().Tamano))
             {
-                b.Push(a.Pop());
+                destino.Push(origen.Pop());
+                movimientos++;
+                Console.WriteLine($"\nSituación tras el movimiento {movimientos}");
+                MostrarEstado();
             }
-            else if (!b.IsEmpty() && (a.IsEmpty() || b.Top().Tamano < a.Top().Tamano))
+            else
             {
-                a.Push(b.Pop());
+                throw new InvalidOperationException("Movimiento inválido: No se puede colocar un disco más grande sobre uno más pequeño.");
             }
-            movimientos++;
+        }
+
+        public void ResolverRecursivo(int n, Pila origen, Pila destino, Pila auxiliar)
+        {
+            if (n == 1)
+            {
+                MoverDisco(origen, destino);
+                return;
+            }
+
+            ResolverRecursivo(n - 1, origen, auxiliar, destino);
+            MoverDisco(origen, destino);
+            ResolverRecursivo(n - 1, auxiliar, destino, origen);
+        }
+
+        public void Resolver()
+        {
+            Console.WriteLine("\nSituación inicial");
             MostrarEstado();
-        }
 
-        public int ResolverIterativo(int n)
-        {
-            int totalMovimientos = (int)Math.Pow(2, n) - 1;
-            Pila[] palos = (n % 2 == 0) ? new Pila[] { ini, aux, fin } : new Pila[] { ini, fin, aux };
+            ResolverRecursivo(ini.Count, ini, fin, aux);
 
-            for (int i = 1; i <= totalMovimientos; i++)
-            {
-                MoverDisco(palos[(i % 3)], palos[((i + 1) % 3)]);
-            }
-            return movimientos;
+            Console.WriteLine("\nSituación final");
+            MostrarEstado();
+            Console.WriteLine($"Problema resuelto en {movimientos} movimientos.");
         }
 
         public void MostrarEstado()
