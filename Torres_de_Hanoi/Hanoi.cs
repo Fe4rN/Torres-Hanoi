@@ -34,6 +34,25 @@ namespace Torres_de_Hanoi
             }
         }
 
+        public void ResolverIterativo()
+        {
+            Console.WriteLine("\nSituación inicial");
+            MostrarEstado();
+
+            int totalMovimientos = (int)Math.Pow(2, ini.Count) - 1;
+            Pila[] palos = { ini, fin, aux }; // Orden corregido: la pila final ahora es "fin"
+
+            for (int i = 1; i <= totalMovimientos; i++)
+            {
+                int desde = (i & i - 1) % 3;
+                int hacia = ((i | i - 1) + 1) % 3;
+
+                MoverDisco(palos[desde], palos[hacia]);
+            }
+
+            Console.WriteLine($"Problema resuelto en {totalMovimientos} movimientos.");
+        }
+
         public void ResolverRecursivo(int n, Pila origen, Pila destino, Pila auxiliar) //Resuelve el problema usando la recursión
         {
             if (n == 1)
@@ -45,18 +64,16 @@ namespace Torres_de_Hanoi
             ResolverRecursivo(n - 1, origen, auxiliar, destino);
             MoverDisco(origen, destino);
             ResolverRecursivo(n - 1, auxiliar, destino, origen);
+
+            Console.WriteLine($"Problema resuelto en {movimientos} movimientos.");
         }
 
-        public void Resolver()
+        public void ResolverR()
         {
             Console.WriteLine("\nSituación inicial");
             MostrarEstado();
 
             ResolverRecursivo(ini.Count, ini, fin, aux);
-
-            Console.WriteLine("\nSituación final");
-            MostrarEstado();
-            Console.WriteLine($"Problema resuelto en {movimientos} movimientos.");
         }
 
         public void MostrarEstado()
