@@ -40,7 +40,16 @@ namespace Torres_de_Hanoi
             MostrarEstado();
 
             int totalMovimientos = (int)Math.Pow(2, ini.Count) - 1;
-            Pila[] palos = { ini, fin, aux }; // Orden corregido: la pila final ahora es "fin"
+
+            Pila[] palos;
+            if (ini.Count % 2 == 0)
+            {
+                palos = new Pila[] { ini, fin, aux }; // Para n par
+            }
+            else
+            {
+                palos = new Pila[] { ini, aux, fin }; // Para n impar
+            }
 
             for (int i = 1; i <= totalMovimientos; i++)
             {
