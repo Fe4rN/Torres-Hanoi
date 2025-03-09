@@ -39,34 +39,34 @@ namespace Torres_de_Hanoi
             Console.WriteLine("\nSituación inicial");
             MostrarEstado();
 
-            int totalMovimientos = (int)Math.Pow(2, ini.Count) - 1;
+            int totalMovimientos = (int)Math.Pow(2, ini.Count) - 1; // Calcula la cantidad de movimientos (2^n - 1)
 
-            Pila[] palos;
-            if (ini.Count % 2 == 0)
+            Pila[] palos; //Crea las pilas
+            if (ini.Count % 2 == 0) // Si el numero es par
             {
-                palos = new Pila[] { ini, fin, aux }; // Para n par
+                palos = new Pila[] { ini, fin, aux }; //Si es par, las pilas van en ese orden (Dios sabe porque)
             }
             else
             {
-                palos = new Pila[] { ini, aux, fin }; // Para n impar
+                palos = new Pila[] { ini, aux, fin }; //Si es impar, las pilas van en ese orden
             }
 
-            for (int i = 1; i <= totalMovimientos; i++)
+            for (int i = 1; i <= totalMovimientos; i++) //Por cada movimiento
             {
-                int desde = (i & i - 1) % 3;
-                int hacia = ((i | i - 1) + 1) % 3;
+                int desde = (i & i - 1) % 3; //Operaciones con bits para averiguar el origen
+                int hacia = ((i | i - 1) + 1) % 3; //Operaciones con bits para averiguar el destino
 
-                MoverDisco(palos[desde], palos[hacia]);
+                MoverDisco(palos[desde], palos[hacia]); //Mueve el disco
             }
 
             Console.WriteLine($"Problema resuelto en {totalMovimientos} movimientos.");
         }
 
-        public void ResolverRecursivo(int n, Pila origen, Pila destino, Pila auxiliar) //Resuelve el problema usando la recursión
+        public void ResolverRecursivo(int n, Pila origen, Pila destino, Pila auxiliar) //Resuelve el problema llamandose a si mismo
         {
-            if (n == 1)
+            if (n == 1) //Si la cantidad de discos en INI es 1
             {
-                MoverDisco(origen, destino);
+                MoverDisco(origen, destino); //Simplemente lo mueve
                 return;
             }
 
@@ -77,7 +77,7 @@ namespace Torres_de_Hanoi
             Console.WriteLine($"Problema resuelto en {movimientos} movimientos.");
         }
 
-        public void ResolverR()
+        public void ResolverR() //Llama al método recursivo
         {
             Console.WriteLine("\nSituación inicial");
             MostrarEstado();
