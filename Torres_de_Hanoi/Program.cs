@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace Torres_de_Hanoi
 {
-    // Clase Principal Program
     class Program
     {
         static void Main()
@@ -12,7 +11,7 @@ namespace Torres_de_Hanoi
             int n = int.Parse(Console.ReadLine());
             Hanoi hanoi = new Hanoi(n);
             Console.Write("Indica I para Iterativo o R para Recursivo... ");
-            string input = Console.ReadLine()?.Trim().ToUpper(); // Normaliza la entrada
+            string input = Console.ReadLine()?.Trim().ToUpper();
 
             while (input != "I" && input != "R")
             {

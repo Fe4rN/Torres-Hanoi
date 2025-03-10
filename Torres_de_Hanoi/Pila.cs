@@ -5,37 +5,37 @@ namespace Torres_de_Hanoi
 {
     class Pila
     {
-        private Stack<Disco> discos = new Stack<Disco>(); //Pila que alamacena los objetos de clase Disco
-        public string Nombre { get; } //Obtiene el nombre de la pila (INI,AUX o FIN)
+        private Stack<Disco> discos = new Stack<Disco>(); 
+        public string Nombre { get; } 
 
-        public Pila(string nombre) => Nombre = nombre; //Constructor de la Pila, que establece su nombre
+        public Pila(string nombre) => Nombre = nombre; 
 
         public void Push(Disco d)
         {
-            if (discos.Count == 0 || d.Tamano < discos.Peek().Tamano) //Si no hay discos o el disco que intenta insertar es menor que el que hay debajo.
+            if (discos.Count == 0 || d.Tamano < discos.Peek().Tamano) 
             {
-                discos.Push(d); //Añade el disco a la pila por arriba
+                discos.Push(d); 
             }
             else
             {
-                throw new InvalidOperationException("No se puede colocar un disco más grande sobre uno más pequeño."); //Lanza una excepción si es imposible
+                throw new InvalidOperationException("No se puede colocar un disco más grande sobre uno más pequeño."); 
             }
         }
 
         public Disco Pop() 
         {
             if (discos.Count > 0)
-                return discos.Pop(); //Quita y devuelve el primero de la pila (el menor)
-            throw new InvalidOperationException("No hay discos para mover."); //Si no hay discos, lanza una excepción
+                return discos.Pop(); 
+            throw new InvalidOperationException("No hay discos para mover."); 
         }
 
-        public Disco Top() => discos.Count > 0 ? discos.Peek() : null; //Devuelve el primer disco
+        public Disco Top() => discos.Count > 0 ? discos.Peek() : null; 
 
-        public bool IsEmpty() => discos.Count == 0; //Devuelve true si la pila está vacía
+        public bool IsEmpty() => discos.Count == 0;
 
-        public int Count => discos.Count; //Devuelve la cantidad de discos que hay en la pila
+        public int Count => discos.Count; 
 
-        public void MostrarEstado() //Recorre los objetos Disco que hay en la pila y escribe en consola su tamaño
+        public void MostrarEstado() 
         {
             Console.Write($"{Nombre}: ");
             foreach (var disco in discos)
